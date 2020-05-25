@@ -7,12 +7,35 @@ const initialState={
         new Ingredient("potato", 4)
     ]
 };
-export function ShoppingListReducers(state=initialState,action:ShoppingListAction.AddIngredients){
+export function ShoppingListReducers(state=initialState,action:ShoppingListAction.ShoppingListActions){
     switch(action.type){
-        case ShoppingListAction.ADD_INGREDIENTS:
+        case ShoppingListAction.ADD_INGREDIENT:
             return {
                 ...state,
                 ingredients:[...state.ingredients,action.payload]
+            };
+        case ShoppingListAction.ADD_INGREDIENTS:
+            return{
+                ...state,
+                ingredients:[...state.ingredients,...action.payload]
+            };
+        case ShoppingListAction.UPDATE_INGREDIENT:
+            const ingredient= state.ingredients[action.payload.index];
+            const updatedIngredient={
+                ...action.payload.ingredient
+            };
+            const updatedIngredients=[...state.ingredients];
+            updatedIngredients[action.payload.index]=updatedIngredient;
+            return{
+                ...state,
+                ingredients:updatedIngredients
+            };
+        case ShoppingListAction.DELETE_INGREDIENT:
+            return{
+                ...state,
+                ingredients: state.ingredients.filter((ing,itemIndex)=>{
+                    return itemIndex != action.payload;
+                })
             };
         default:
             return state;

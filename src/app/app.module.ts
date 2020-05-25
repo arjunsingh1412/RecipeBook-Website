@@ -8,7 +8,6 @@ import { CoreModule } from './core-module';
 import { SharedModule } from './shared/shared.module';
 import {StoreModule} from '@ngrx/store';
 import { ShoppingListReducers } from './shopping-list/store/shopping-list.reducers';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 @NgModule({
@@ -22,8 +21,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     AppRoutingModule,
     StoreModule.forRoot({shoppingList:ShoppingListReducers}),
     CoreModule,
-    SharedModule,
-    BrowserAnimationsModule
+    SharedModule
   ],
   bootstrap: [AppComponent]
 })
