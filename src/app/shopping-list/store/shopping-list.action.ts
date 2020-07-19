@@ -2,10 +2,12 @@ import { Action } from "@ngrx/store";
 import { Ingredient } from "src/app/recipe/shared/stores/models/ingredient.model";
 
 
-export const ADD_INGREDIENT = 'ADD_INGREDIENT';
-export const ADD_INGREDIENTS = 'ADD_INGREDIENTS';
-export const UPDATE_INGREDIENT = 'UPDATE_INGREDIENTS';
-export const DELETE_INGREDIENT = 'DELETE_INGREDIENTS';
+export const ADD_INGREDIENT = '[Shopping List] add Ingredient';
+export const ADD_INGREDIENTS = '[Shopping List] add Ingredients';
+export const UPDATE_INGREDIENT = '[Shopping List] update Ingredient';
+export const DELETE_INGREDIENT = '[Shopping List] delete Ingredient';
+export const START_EDIT = '[Shopping List] start Editing';
+export const STOP_EDIT = '[Shopping List] stop Editing';
 
 
 export class AddIngredient implements Action {
@@ -24,4 +26,11 @@ export class DeleteIngredient implements Action {
     readonly type = DELETE_INGREDIENT;
     constructor(public payload: number) { }
 }
-export type ShoppingListActions = AddIngredient | AddIngredients | UpdateIngredient | DeleteIngredient;
+export class StartEdit implements Action{
+    readonly type = START_EDIT;
+    constructor(public payload:number){}
+}
+export class StopEdit implements Action{
+    readonly type = STOP_EDIT;
+}
+export type ShoppingListActions = AddIngredient | AddIngredients | UpdateIngredient | DeleteIngredient | StartEdit | StopEdit;

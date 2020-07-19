@@ -7,8 +7,12 @@ import { HttpClientModule } from '@angular/common/http';
 import { CoreModule } from './core-module';
 import { SharedModule } from './shared/shared.module';
 import {StoreModule} from '@ngrx/store';
-import { ShoppingListReducers } from './shopping-list/store/shopping-list.reducers';
-
+import * as fromApp from '../app/store/app.reducer';
+import { EffectsModule } from '@ngrx/effects';
+import { AuthEffects } from './auth/store/auth.effect';
+import { RecipeEffects } from './recipe/store/recipe.effects';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -19,9 +23,11 @@ import { ShoppingListReducers } from './shopping-list/store/shopping-list.reduce
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
-    StoreModule.forRoot({shoppingList:ShoppingListReducers}),
+    StoreModule.forRoot(fromApp.appReducer),
+    EffectsModule.forRoot([AuthEffects,RecipeEffects]),
     CoreModule,
-    SharedModule
+    SharedModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   bootstrap: [AppComponent]
 })
